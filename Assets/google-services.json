@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "725226988200",
+    "project_id": "digitaltwinproject-8d54b",
+    "storage_bucket": "digitaltwinproject-8d54b.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:725226988200:android:bacde2bf62b95b29d7189d",
+        "android_client_info": {
+          "package_name": "com.dtproject.firebasedb"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCD_DYcpkN6q7OHDN5X2lOuUcfOqvW8hUg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
