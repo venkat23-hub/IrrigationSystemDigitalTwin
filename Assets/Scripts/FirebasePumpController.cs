@@ -36,7 +36,7 @@ public class FirebasePumpController : MonoBehaviour
 
             FirebaseDatabase dbInstance = FirebaseDatabase.GetInstance(
                 app,
-                "https://digitaltwinproject-8d54b-default-rtdb.firebaseio.com/"
+                "https://ml-firebase-demo-default-rtdb.firebaseio.com/"
             );
 
             db = dbInstance.RootReference;
@@ -58,7 +58,7 @@ public class FirebasePumpController : MonoBehaviour
     // ----------------------------------------------------
     void ListenPumpStatus()
     {
-        db.Child("pump_status").ValueChanged += (sender, e) =>
+        db.Child("irrigation").Child("pump_status").ValueChanged += (sender, e) =>
         {
             if (!e.Snapshot.Exists) return;
 
@@ -80,7 +80,7 @@ public class FirebasePumpController : MonoBehaviour
 // ----------------------------------------------------
 void ListenWaterQuantity()
 {
-    db.Child("irrigation").Child("predicted_quantity").ValueChanged += (sender, e) =>
+    db.Child("irrigation").Child("water_quantity_lph").ValueChanged += (sender, e) =>
     {
         if (!e.Snapshot.Exists) return;
 
@@ -91,7 +91,7 @@ void ListenWaterQuantity()
         if (qty > 0.01f)
         {
             Debug.Log("Water quantity > 0 → turning pump ON");
-            db.Child("pump_status").SetValueAsync("ON");
+            db.Child("irrigation").Child("pump_status").SetValueAsync("ON");
 
             // turn on water visual layer
             waterLayer.SetActive(true);
@@ -101,7 +101,7 @@ void ListenWaterQuantity()
         if (qty <= 0.01f)
         {
             Debug.Log("Water quantity is zero → turning pump OFF");
-            db.Child("pump_status").SetValueAsync("OFF");
+            db.Child("irrigation").Child("pump_status").SetValueAsync("OFF");
 
             // hide water visual layer
             waterLayer.SetActive(false);
@@ -161,7 +161,7 @@ void ListenWaterQuantity()
     public void SetPumpOn()
     {
         if (!firebaseReady) return;
-        db.Child("pump_status").SetValueAsync("ON");
+        db.Child("irrigation").Child("pump_status").SetValueAsync("ON");
         waterLayer.SetActive(true);
     }
 
@@ -171,7 +171,7 @@ void ListenWaterQuantity()
     public void SetPumpOff()
     {
         if (!firebaseReady) return;
-        db.Child("pump_status").SetValueAsync("OFF");
+        db.Child("irrigation").Child("pump_status").SetValueAsync("OFF");
         waterLayer.SetActive(false);
     }
 }
